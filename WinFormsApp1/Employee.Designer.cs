@@ -210,6 +210,7 @@
             // 
             // comboBox1
             // 
+            comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBox1.BackColor = Color.LightSlateGray;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Male", "Female", "Intersex" });
@@ -248,6 +249,7 @@
             dataGridView1.Size = new Size(553, 341);
             dataGridView1.TabIndex = 34;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.DoubleClick += dataGridView1_DoubleClick;
             // 
             // AddBtn
             // 
@@ -317,10 +319,12 @@
             // 
             // dateTimePicker1
             // 
+            dateTimePicker1.Checked = false;
             dateTimePicker1.Location = new Point(181, 260);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(163, 27);
             dateTimePicker1.TabIndex = 41;
+            dateTimePicker1.Value = new DateTime(2024, 3, 6, 0, 0, 0, 0);
             // 
             // Employee
             // 
@@ -355,6 +359,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Employee";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Employee";
             Load += Employee_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

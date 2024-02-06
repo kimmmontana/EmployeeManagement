@@ -64,6 +64,7 @@
             ViewButton.TabIndex = 3;
             ViewButton.Text = "View";
             ViewButton.UseVisualStyleBackColor = true;
+            ViewButton.Click += ViewButton_Click;
             // 
             // button2
             // 

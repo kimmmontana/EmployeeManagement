@@ -74,7 +74,7 @@ namespace WinFormsApp1
                     DisplayEmp();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -131,41 +131,46 @@ namespace WinFormsApp1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox1.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-            textBox2.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString(); ;
-            textBox3.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString(); ;
-            textBox6.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString(); ;
-            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString(); ;
-            comboBox2.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString(); ;
-            comboBox4.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString(); ;
+            textBox2.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString(); 
+            textBox3.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString(); 
+            textBox6.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString(); 
+            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString(); 
+            comboBox2.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString(); 
+            comboBox4.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString(); 
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (textBox1.Text == " " || textBox2.Text == " " || textBox3.Text == " " || textBox6.Text == " ")
-                {
-                    MessageBox.Show("Missing values is not allowed.");
-                }
-                else
-                {
-                    Con.Open();
-                    string query = "update ETBL set EmpId='" + textBox1.Text + "', EmpName = '" + textBox2.Text + "', EmpAdd= '" + textBox3.Text + "', EmpPos= '" + comboBox2.SelectedItem.ToString() + "', EmpDob= '" + dateTimePicker1.Value.Date + "', EmpPhone='" + textBox6.Text + "', EmpGen= '" + comboBox1.SelectedItem.ToString() + "', EmpEdu= '" + comboBox4.SelectedItem.ToString() + "'";
-                    SqlCommand cmd = new SqlCommand(query, Con);
-                    cmd.ExecuteNonQuery();
-                    Con.Close();
-                    MessageBox.Show("Record Update Succesfuly");
-                    DisplayEmp();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Con.Close();
-            }
+            Con.Open();
+            string query = "UPDATE ETBL SET empName = @EmpName, EmpAdd = @EmpAdd, EmpPos = @EmpPos, EmpDob = @EmpDob, EmpPhone = @EmpPhone, EmpGen = @EmpGen, EmpEdu = @EmpEdu WHERE EmpId = @EmpId";
+            SqlCommand cmd = new SqlCommand(query, Con);
+
+            cmd.Parameters.AddWithValue("@EmpName", textBox2.Text);
+            cmd.Parameters.AddWithValue("@EmpAdd", textBox3.Text);
+            cmd.Parameters.AddWithValue("@EmpGen", comboBox1.Text);
+            cmd.Parameters.AddWithValue("@EmpDob", dateTimePicker1.Value.Date);
+            cmd.Parameters.AddWithValue("@EmpPos", comboBox2.Text);
+            cmd.Parameters.AddWithValue("@EmpPhone", textBox6.Text);
+            cmd.Parameters.AddWithValue("@EmpEdu", comboBox4.Text);
+            cmd.Parameters.AddWithValue("@EmpId", textBox1.Text);
+
+            cmd.ExecuteNonQuery();
+            Con.Close();
+            MessageBox.Show("Record Has been Updated.");
+            DisplayEmp();
+            
+
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            textBox1.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            textBox2.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString(); 
+            textBox3.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString(); 
+            textBox6.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString(); 
+            comboBox1.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString(); 
+            comboBox2.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString(); 
+            comboBox4.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString(); 
         }
     }
 }

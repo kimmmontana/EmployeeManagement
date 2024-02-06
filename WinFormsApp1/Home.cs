@@ -40,5 +40,12 @@ namespace WinFormsApp1
             obj.Show();
             this.Hide();
         }
+
+        private void ViewButton_Click(object sender, EventArgs e)
+        {
+            ViewEmployee obj = new ViewEmployee();
+            obj.Show();
+            this.Hide();
+        }
     }
 }
